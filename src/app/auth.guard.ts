@@ -29,23 +29,12 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
           return false;
         }
       });
-
-      }
-      // this.authService.isAuthenticated()
-      //   .then(
-      //     (authenticated: boolean) => {
-      //       if (authenticated) {
-      //         return true;
-      //       } else {
-      //         this.router.navigate(['/']);
-      //       }
-      //     }
-      //   );
+  }
 
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+    return this.canActivate(childRoute, state);
   }
   canDeactivate(
     component: unknown,
