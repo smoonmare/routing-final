@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -21,7 +22,8 @@ const routes: Routes = [
     { path: ':id', component: ServerComponent},
     { path: ':id/edit', canDeactivate: [CanDeactivateGuard], component: EditServerComponent}
   ]},
-  { path: '**', component: PageNotFoundComponent}
+  // { path: '**', component: PageNotFoundComponent}
+  { path: '**' ,component: ErrorPageComponent, data: {message: 'Page not found!'}}
 ];
 
 @NgModule({
