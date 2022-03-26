@@ -4,7 +4,7 @@ import { AuthGuard } from './auth.guard';
 import { ErrorPageComponent } from './error-page/error-page.component';
 
 import { HomeComponent } from './home/home.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+// import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CanDeactivateGuard } from './servers/edit-server/can-deactivate.guard';
 import { EditServerComponent } from './servers/edit-server/edit-server.component';
 import { ServerComponent } from './servers/server/server.component';
@@ -28,7 +28,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes)
+    // RouterModule.forRoot(routes, {useHash: true})
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

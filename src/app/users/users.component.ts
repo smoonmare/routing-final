@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from './shared/user.interface';
 
 @Component({
   selector: 'app-users',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent {
-  users = [
+  users: User[] = [
     {
       id: 1,
       name: 'Max'
