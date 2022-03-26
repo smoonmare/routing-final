@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { ServersService } from '../servers.service';
+import { ServersService } from '../shared/servers.service';
+import { Server } from '../shared/server.interface';
 import { CanComponentDeactivate } from './can-deactivate.guard';
 
 @Component({
@@ -11,7 +12,7 @@ import { CanComponentDeactivate } from './can-deactivate.guard';
   styleUrls: ['./edit-server.component.css']
 })
 export class EditServerComponent implements OnInit, CanComponentDeactivate {
-  server?: {id: number, name: string, status: string};
+  server?: Server;
   serverName = '';
   serverStatus = '';
   allowEdit = false;
@@ -24,8 +25,9 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
   ngOnInit() {
     console.log(this.route.snapshot.queryParams);
     console.log(this.route.snapshot.fragment);
-    this.route.queryParams.subscribe((queryParams: Params) => {
-      this.allowEdit = queryParams['allowEdit'] === '1' ? true : false;
+    this.route.queryParams.subscribe(
+      (queryParams: Params) => {
+        this.allowEdit = queryParams['allowEdit'] === '1' ? true : false;
     });
     this.route.fragment.subscribe();
     const id = +this.route.snapshot.params['id'];
@@ -44,10 +46,15 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
     if (!this.allowEdit) {
       return true;
     }
-    if ((this.serverName !== this.server?.name || this.serverStatus !== this.server?.status) && !this.changesSaved) {
-      return confirm('Do you want to discard the changes?');
+    if
+      ((this.serverName !== this.server?.name
+       || this.serverStatus
+       !== this.server?.status)
+       && !this.changesSaved
+      ) {
+          return confirm('Do you want to discard the changes?');
     } else {
-      return true;
+          return true;
     }
   }
 
